@@ -7,20 +7,9 @@
 
 Análise da relação entre a infraestrutura semafórica e a gravidade dos sinistros de trânsito em Fortaleza (2015–2024).
 
-## Estrutura do Repositório
-
-```
-.
-├── data/           # Datasets brutos e processados
-├── notebooks/      # Jupyter Notebooks de análise
-├── docs/           # Documentos das entregas
-│   └── entrega1.md
-└── README.md
-```
-
 ## Datasets
 
-| Dataset | Fonte | Período |
-|---|---|---|
-| Sinistros de Trânsito | AMC / Dados Abertos Fortaleza | 2015–2024 |
-| Parque Semafórico | CTAFOR/AMC / Dados Abertos Fortaleza | Atual |
+| Dataset               | Fonte                                | Período   |
+| --------------------- | ------------------------------------ | --------- |
+| Sinistros de Trânsito | AMC / Dados Abertos Fortaleza        | 2015–2024 |
+| Parque Semafórico     | CTAFOR/AMC / Dados Abertos Fortaleza | Atual     |
