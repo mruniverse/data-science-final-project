@@ -48,6 +48,8 @@ A integração entre os dois datasets será realizada via operações espaciais 
 - **Número de semáforos em raio de 100 m e 250 m** do local do acidente (densidade semafórica);
 - **Indicador binário** de presença de semáforo na interseção.
 
+Como o dataset de semáforos registra o estado atual do parque semafórico (atualizado em 2025), enquanto os sinistros cobrem o período 2015–2024, será necessário realizar uma **reconstrução histórica do estado da rede semafórica** para cada sinistro. O dataset de semáforos contém os campos `DATA_IMPLANTAÇÃO`, `DATA_DESATIVAÇÃO` e `DATA_REATIVAÇÃO`, que permitem filtrar, para cada acidente, apenas os semáforos que estavam ativos na data da ocorrência. Semáforos desativados (`STATUS = "DESATIVADO"`) também serão considerados como variável de contexto, pois interseções onde o semáforo foi removido podem apresentar padrão distinto de sinistros.
+
 Após essa integração e engenharia de atributos (variáveis de hora do dia, dia da semana, mês, estação do ano, tipo de via, etc.), o dataset resultante deverá superar os 15 preditores exigidos, combinando variáveis numéricas e categóricas.
 
 ---
