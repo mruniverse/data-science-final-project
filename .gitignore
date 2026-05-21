@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Dados brutos (arquivos grandes)
+data/*.geojson
+data/*.csv
+data/*.json
+
+# macOS
+.DS_Store
