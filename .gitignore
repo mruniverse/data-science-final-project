@@ -10,9 +10,7 @@ venv/
 .ipynb_checkpoints/
 
 # Dados brutos (arquivos grandes)
-data/*.geojson
-data/*.csv
-data/*.json
+data/*
 
 # macOS
 .DS_Store
