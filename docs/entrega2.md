@@ -68,8 +68,13 @@ A integração é **espacial** e **temporal**:
 | `data_hora`                              | Não existia                       | Construída de `DIA/MES/ANO + HORA` (datas inválidas → `NaT`) |
 | `NUMERO`                                 | ~50% ausente, baixo valor preditivo | Coluna removida                                    |
 | Semáforos — datas                        | Formato `DD/MM/AAAA`              | `to_datetime(dayfirst=True)`                         |
-| Semáforos — `ESTÁGIOS` (143 ausentes)    | Ausência                          | `estagios_num` (`Int64`, mantém ausentes)            |
-| Semáforos — `MODO_CONTROLE` (11,5% nulo) | Ausência                          | Categoria explícita `"Desconhecido"`                 |
+| Semáforos — `MODO_CONTROLE` (11,5% nulo) | Ausência                          | Imputação por **constante** (`"Desconhecido"`)       |
+| `semaforo_proximo_estagios` (~8% ausente) | Ausência (estágios desconhecidos) | **Imputação pela moda da rua** (`LOG1`) + *fallback* moda global; flag `estagios_imputado` |
+| `dist_semaforo_m` (outliers)             | Distâncias extremas (até ~6.675 m) | Detectados por IQR; **mantidos** (são reais) + versão winsorizada `dist_semaforo_m_cap` (p99 ≈ 2.088 m) |
+
+> **Imputação de `semaforo_proximo_estagios`:** dos 10.609 ausentes, 6.159 foram preenchidos pela
+> moda da rua e 4.450 pela moda global (ruas sem nenhum valor conhecido). A flag `estagios_imputado`
+> permite, na Etapa 3, testar as hipóteses usando **apenas os valores conhecidos**.
 
 O pipeline é **determinístico e idempotente**: mapeamentos fixos, sem amostragem aleatória nas
 transformações; re-executar produz o mesmo resultado.
@@ -79,8 +84,8 @@ transformações; re-executar produz o mesmo resultado.
 ## 4. Dataset Final
 
 - **Saída:** `data/sinistros_semaforos_integrado.csv` (CSV).
-- **Dimensões:** 130.823 linhas × 35 colunas (28 originais − `NUMERO` + `data_hora` + 7 variáveis de
-  integração).
+- **Dimensões:** 130.823 linhas × 37 colunas (28 originais − `NUMERO` + `data_hora` + 7 variáveis de
+  integração + `estagios_imputado` + `dist_semaforo_m_cap`).
 - **Distância ao semáforo mais próximo:** mediana ≈ **147 m** (25% a ≤ 56 m), confirmando que a
   malha semafórica concentra-se nas vias principais.
 
